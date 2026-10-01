@@ -29,7 +29,7 @@ def fetch_weather(latitude, longitude):
         "latitude": latitude,
         "longitude": longitude,
         "timezone": "auto",
-        "forecast_days": 2,
+        "forecast_days": 3,
         "current": "temperature_2m,wind_speed_10m,precipitation,uv_index",
         "hourly": (
             "temperature_2m,wind_speed_10m,precipitation,"

@@ -93,18 +93,15 @@ def no_guidance_response(state):
 
 
 def error_response(state):
-    error = state.get("error", "").lower()
+    error = state.get("error", "")
+    error_lower = error.lower()
 
-    if "location" in error or "geocod" in error or "resolve" in error:
-        state["response"] = (
-            "I could not resolve that location, so I cannot retrieve reliable "
-            "weather information. Please check the city name and try again."
-        )
+    if "understand" in error_lower or "api_key" in error_lower or "quota" in error_lower or "gemini" in error_lower:
+        state["response"] = f"Unable to process query with AI: {error}"
+    elif "location" in error_lower or "geocod" in error_lower or "resolve" in error_lower:
+        state["response"] = "I could not resolve that location. Please specify a valid city."
     else:
-        state["response"] = (
-            "Live weather data is temporarily unavailable, so I cannot provide "
-            "a weather-based recommendation right now. Please try again shortly."
-        )
+        state["response"] = f"Live weather data is temporarily unavailable: {error}"
 
     return state
 
