@@ -54,13 +54,8 @@ for message in st.session_state.messages:
             st.markdown(message["content"])
 
 
-if st.button("Clear chat"):
-    st.session_state.messages = []
-    st.rerun()
-
-
 user_input = st.chat_input(
-    "Example: Is it safe to walk in Bhopal tomorrow at 12 PM?"
+    "Example: Can I go for picnic today in Mumbai?"
 )
 
 if user_input:

@@ -1,6 +1,7 @@
 import json
 import os
 import re
+from functools import lru_cache
 
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -16,6 +17,7 @@ DEFAULT_INTENT = {
 }
 
 
+@lru_cache(maxsize=1)
 def get_llm():
     api_key = os.getenv("GEMINI_API_KEY")
 
@@ -26,6 +28,7 @@ def get_llm():
         model="gemini-3.8-flash",
         google_api_key=api_key,
         thinking_level="low",
+        temperature=0,
     )
 
 

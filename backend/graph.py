@@ -5,7 +5,6 @@ from backend.policy import match_sops
 from backend.state import BotState
 from backend.weather import fetch_weather, geocode_city, get_weather_for_period
 
-
 def understand_query(state):
     try:
         intent = extract_intent(

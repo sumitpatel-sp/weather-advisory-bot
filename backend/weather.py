@@ -2,10 +2,17 @@ from datetime import datetime, timedelta
 
 import requests
 
+HTTP_SESSION = requests.Session()
+GEOCODE_CACHE = {}
+
 
 def geocode_city(city_name):
+    if city_name in GEOCODE_CACHE:
+        latitude, longitude = GEOCODE_CACHE[city_name]
+        return latitude, longitude, None
+
     try:
-        response = requests.get(
+        response = HTTP_SESSION.get(
             "https://geocoding-api.open-meteo.com/v1/search",
             params={"name": city_name, "count": 1},
             timeout=10,
@@ -18,7 +25,11 @@ def geocode_city(city_name):
             return None, None, f"Could not resolve location: {city_name}"
 
         result = results[0]
-        return result["latitude"], result["longitude"], None
+        coordinates = (result["latitude"], result["longitude"])
+        if len(GEOCODE_CACHE) >= 128:
+            GEOCODE_CACHE.pop(next(iter(GEOCODE_CACHE)))
+        GEOCODE_CACHE[city_name] = coordinates
+        return *coordinates, None
 
     except requests.RequestException as error:
         return None, None, f"Geocoding API error: {error}"
@@ -38,7 +49,7 @@ def fetch_weather(latitude, longitude):
     }
 
     try:
-        response = requests.get(
+        response = HTTP_SESSION.get(
             "https://api.open-meteo.com/v1/forecast",
             params=params,
             timeout=10,
