@@ -1,0 +1,7 @@
+streamlit==1.54.0
+langchain==1.4.3
+langchain-google-genai==4.4.0
+langgraph==1.0.10
+python-dotenv==1.2.2
+requests==2.32.5
+PyYAML==6.0.3

@@ -1,0 +1,152 @@
+- id: SOP-001
+  category: outdoor_exercise
+  activity: cycling
+  severity: high
+  condition_type: threshold
+  field: wind_speed
+  operator: ">="
+  value: 40
+  advice: "Avoid cycling. Wind at or above 40 km/h can seriously affect bicycle balance and control."
+
+- id: SOP-002
+  category: outdoor_exercise
+  activity: outdoor_exercise
+  severity: high
+  condition_type: threshold
+  field: uv_index
+  operator: ">="
+  value: 8
+  advice: "Avoid prolonged outdoor exercise. The UV level is very high."
+
+- id: SOP-003
+  category: outdoor_exercise
+  activity: outdoor_exercise
+  severity: moderate
+  condition_type: threshold
+  field: precipitation_probability
+  operator: ">="
+  value: 70
+  advice: "Outdoor exercise is not recommended because the rain probability is high."
+
+- id: SOP-004
+  category: travel
+  activity: two_wheeler
+  severity: high
+  condition_type: threshold
+  field: wind_speed
+  operator: ">="
+  value: 50
+  advice: "Avoid two-wheeler travel. Strong wind can cause loss of control."
+
+- id: SOP-005
+  category: travel
+  activity: travel
+  severity: moderate
+  condition_type: threshold
+  field: precipitation_probability
+  operator: ">="
+  value: 80
+  advice: "Travel only if necessary and expect wet roads and reduced visibility."
+
+- id: SOP-006
+  category: vulnerable_groups
+  activity: children_outdoor
+  severity: high
+  condition_type: threshold
+  field: temperature
+  operator: ">="
+  value: 42
+  advice: "Keep children indoors. Extreme heat creates a serious risk of heat illness."
+
+- id: SOP-007
+  category: vulnerable_groups
+  activity: elderly_outdoor
+  severity: high
+  condition_type: threshold
+  field: temperature
+  operator: ">="
+  value: 40
+  advice: "Elderly people should remain indoors because of the high heat risk."
+
+- id: SOP-008
+  category: vulnerable_groups
+  activity: pets_outdoor
+  severity: high
+  condition_type: threshold
+  field: temperature
+  operator: ">="
+  value: 38
+  advice: "Do not take pets outside. Heat can cause paw injuries and heat illness."
+
+- id: SOP-009
+  category: picnic
+  activity: picnic
+  severity: moderate
+  condition_type: threshold
+  field: precipitation_probability
+  operator: ">="
+  value: 60
+  advice: "A picnic is not recommended because there is a significant chance of rain."
+
+- id: SOP-010
+  category: picnic
+  activity: picnic
+  severity: moderate
+  condition_type: composite
+  min_conditions: 2
+  conditions:
+    - field: temperature
+      operator: ">="
+      value: 38
+    - field: precipitation_probability
+      operator: ">="
+      value: 50
+    - field: wind_speed
+      operator: ">="
+      value: 30
+  advice: "Picnic conditions are unfavorable because multiple weather risks are present."
+
+- id: SOP-011
+  category: outdoor_exercise
+  activity: running
+  severity: moderate
+  condition_type: threshold
+  field: temperature
+  operator: ">="
+  value: 38
+  advice: "Running is not recommended in this heat because of dehydration and heat-exhaustion risk."
+
+- id: SOP-012
+  category: vulnerable_groups
+  activity: children_outdoor
+  severity: moderate
+  condition_type: threshold
+  field: uv_index
+  operator: ">="
+  value: 7
+  advice: "Limit children's outdoor exposure because the UV level is high."
+
+- id: SOP-013
+  category: picnic
+  activity: picnic
+  severity: low
+  condition_type: always
+  advice: "For a picnic, use shade, carry drinking water, and check for local venue or weather alerts before leaving. This SOP applies because picnic suitability is a qualitative planning question, not only a single numeric weather threshold."
+
+- id: SOP-014
+  category: outdoor_exercise
+  activity: cycling
+  severity: low
+  condition_type: composite
+  min_conditions: 3
+  conditions:
+    - field: wind_speed
+      operator: "<"
+      value: 40
+    - field: precipitation_probability
+      operator: "<"
+      value: 70
+    - field: uv_index
+      operator: "<"
+      value: 8
+  advice: "Cycling is permitted under this SOP because none of the defined high-risk cycling, rain, or UV thresholds are met. Continue to use normal road-safety precautions."
