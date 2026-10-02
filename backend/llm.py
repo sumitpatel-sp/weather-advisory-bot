@@ -19,10 +19,23 @@ DEFAULT_INTENT = {
 
 @lru_cache(maxsize=1)
 def get_llm():
+    groq_key = os.getenv("GROQ_API_KEY")
+
+    if groq_key:
+        from langchain_groq import ChatGroq
+
+        return ChatGroq(
+            model="qwen/qwen3.8-27b",
+            api_key=groq_key,
+            temperature=0,
+        )
+
     api_key = os.getenv("GEMINI_API_KEY")
 
     if not api_key:
-        raise RuntimeError("GEMINI_API_KEY is missing from the .env file.")
+        raise RuntimeError(
+            "Neither GROQ_API_KEY nor GEMINI_API_KEY is set in the .env file."
+        )
 
     return ChatGoogleGenerativeAI(
         model="gemini-3.8-flash",
